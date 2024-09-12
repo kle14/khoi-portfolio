@@ -19,6 +19,7 @@ module.exports = {
         "max-lgw": { max: "1024px" },
         "max-xl": { raw: "(max-width: 1280px)" },
         "max-2xl": { raw: "(max-width: 1536px)" },
+        ipad: { raw: "(min-width: 768px) and (max-width: 1024px)" },
       },
       fontFamily: {
         primary: ["Droid Sans", "sans-serif"],

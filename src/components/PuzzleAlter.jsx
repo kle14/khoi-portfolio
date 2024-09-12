@@ -99,7 +99,7 @@ export const PuzzleAlter = () => {
     };
 
     return (
-        <div className="sm:p-4 flex flex-col items-center h-full max-sm:justify-between">
+        <div className="sm:p-4 flex flex-col items-center h-full justify-between">
             <h1 className="text-2xl font-bold mb-4">Guess the word</h1>
             <div className="mb-4">
                 {guesses.map((guess, i) => (
@@ -107,7 +107,7 @@ export const PuzzleAlter = () => {
                         {Array.from({ length: 5 }).map((_, j) => (
                             <div
                                 key={j}
-                                className={`w-14 max-ssm:w-11 h-14 max-ssm:h-11 border-style rounded-lg flex items-center justify-center mr-1 text-2xl font-bold ${getLetterBackgroundColor(guess[j], j, i)}`}
+                                className={`w-14 max-ssm:w-11 h-14 max-ssm:h-11 border-style rounded-lg flex items-center justify-center mr-1 ipad:h-20 ipad:w-20 ipad:mr-3 text-2xl font-bold ${getLetterBackgroundColor(guess[j], j, i)}`}
                             >
                                 {i === currentRow ? currentGuess[j] || '' : guess[j] || ''}
                             </div>
@@ -122,7 +122,7 @@ export const PuzzleAlter = () => {
                             <button
                                 key={key}
                                 onClick={() => handleKeyPress(key)}
-                                className={`mx-0.5 sm:mx-1 max-ssm:px-2 px-3 py-2 rounded-lg max-sm:text-xs border-style box-glow ${getKeyboardKeyClass(key)}`}
+                                className={`mx-0.5 sm:mx-1 max-ssm:px-2 px-3 py-2 ipad:px-5 ipad:py-4 ipad:text-base rounded-lg max-sm:text-xs border-style box-glow ${getKeyboardKeyClass(key)}`}
                                 disabled={gameOver || keyboardStatus[key] === 'absent'}
                             >
                                 {key === 'DELETE' ? deleteIcon : key}
