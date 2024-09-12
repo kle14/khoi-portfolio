@@ -1,0 +1,555 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&display=swap");
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--alt)) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: rgb(var(--alt));
+  border: 2px solid transparent;
+}
+
+:root {
+  --main: 255, 170, 60;
+  --alt: 120, 75, 20;
+  --black: #12100d;
+}
+
+::selection {
+  background-color: rgba(var(--alt), 0.7);
+  color: rgb(var(--main));
+}
+
+
+body {
+  background: black;
+  color: rgb(var(--main));
+  font-family: "Roboto Mono", monospace;
+  display: grid;
+  align-content: center;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+b,
+strong {
+  font-weight: normal;
+}
+
+.noclick {
+  pointer-events: none;
+}
+
+.piece {
+  display: block;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.frame {
+  background-color: transparent;
+  border-radius: 30px;
+  border: 20px solid;
+  border-bottom-color: #0f0e0d;
+  border-left-color: #080807;
+  border-right-color: #080807;
+  border-top-color: #020202;
+  box-shadow: inset 0 0 24rem black, inset 0 0 5rem black, 0 0 16rem black;
+  pointer-events: none;
+  max-width: 900px;
+  height: 550px;
+  width: 96%;
+  max-height: calc(100vh - 20px);
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  min-height: 350px;
+}
+
+@media (max-width: 1024px) {
+  .frame {
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    border: 3px solid;
+    border-bottom-color: #0f0e0d;
+    border-left-color: #080807;
+    border-right-color: #080807;
+    border-top-color: #020202;
+  }
+}
+
+.output {
+  -webkit-animation: crt-output 10ms infinite;
+  animation: crt-output 10ms infinite;
+  background-color: var(--black);
+  position: absolute;
+  padding: 30px;
+  pointer-events: auto;
+  text-shadow: 0rem 0.2rem 1rem currentColor;
+  z-index: -1;
+}
+
+@media (max-width: 1024px) {
+  .output {
+    padding: 2px;
+  }
+}
+
+.frame * {
+  font-weight: normal;
+}
+
+@-webkit-keyframes crt-output {
+  0% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes crt-output {
+  0% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.scanlines {
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(rgba(255, 255, 255, 0)),
+      color-stop(50%, rgba(255, 255, 255, 0)),
+      color-stop(70%, rgba(0, 0, 0, 0.2)),
+      to(rgba(0, 0, 0, 0.6)));
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.2) 70%,
+      rgba(0, 0, 0, 0.6));
+  background-size: 100% 0.5rem;
+  border-radius: 30px;
+  position: absolute;
+  z-index: 0;
+}
+
+.glow {
+  -webkit-animation: crt-glow 60s infinite;
+  animation: crt-glow 60s infinite;
+  background: radial-gradient(circle at center,
+      rgb(var(--main)) 0%,
+      rgba(var(--alt), 0.78) 58%,
+      rgba(var(--alt), 0.55) 80%,
+      rgba(var(--alt), 0.27) 93%,
+      rgba(var(--alt), 0) 100%);
+  opacity: 0.15;
+  pointer-events: none;
+  position: fixed;
+  z-index: 2;
+}
+
+@-webkit-keyframes crt-glow {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes crt-glow {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.pipboy {
+  border: 3px solid rgb(var(--main));
+  border-width: 2px 0;
+  position: relative;
+  height: 100%;
+  padding: 16px;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .pipboy {
+    padding: 4px;
+  }
+}
+
+.pipboy::before,
+.pipboy::after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      rgb(var(--main)) 0%,
+      rgba(0, 0, 0, 0) 35%,
+      rgba(0, 0, 0, 0) 65%,
+      rgb(var(--main)) 100%);
+  top: 0;
+}
+
+.pipboy::before {
+  left: 0;
+}
+
+.pipboy::after {
+  right: 0;
+}
+
+.pip-title {
+  font-size: 22px;
+  background: none;
+  border: none;
+  color: rgb(var(--main));
+  position: absolute;
+  padding: 0 5px;
+  text-transform: uppercase;
+  top: -15px;
+  left: 40px;
+  z-index: 2;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 1024px) {
+  .pip-title {
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
+
+.pip-title::after {
+  background: #111;
+  content: "";
+  height: 3px;
+  width: 100%;
+  left: 0;
+  top: 13px;
+  position: absolute;
+  z-index: -1;
+}
+
+.pip-head {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: max-content;
+  max-width: 100%;
+  text-align: right;
+  background: linear-gradient(to bottom,
+      var(--black) 0%,
+      rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .pip-head {
+    visibility: hidden;
+  }
+}
+
+.pip-head li {
+  float: left;
+  margin-left: 10px;
+  padding: 5px 10px;
+  min-width: 120px;
+  position: relative;
+}
+
+.pip-head li::before {
+  content: "";
+  position: absolute;
+  background: var(--black);
+  width: 10px;
+  height: 2px;
+  top: -2px;
+  left: -10px;
+}
+
+.pip-head li::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom,
+      rgb(var(--main)) 0%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.pip-head li b {
+  float: left;
+  margin-right: 1em;
+}
+
+.pipboy a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pipboy ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pip-body {
+  position: relative;
+  height: 100%;
+  z-index: 0;
+}
+
+.pip-foot {
+  display: block;
+  position: absolute;
+  bottom: -14px;
+  width: calc(100% - 60px);
+  left: 30px;
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .pip-foot {
+    bottom: 20px;
+    left: 10px;
+    width: calc(100% - 20px);
+    display: block;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+.pip-foot li {
+  display: contents;
+}
+
+.pip-foot a {
+  border-radius: 0;
+  display: block;
+  float: left;
+  width: 12%;
+  height: 28px;
+  margin: 0 4%;
+  text-align: center;
+  position: relative;
+  line-height: 25px;
+}
+
+.pip-foot a::after {
+  content: "";
+  position: absolute;
+  background: var(--black);
+  width: 100%;
+  height: 2px;
+  left: 0;
+  bottom: 12px;
+  z-index: -1;
+}
+
+a:focus {
+  outline: 1px solid;
+  outline-offset: -1px;
+}
+
+a,
+label,
+label::before {
+  transition: all 0.1s;
+  outline: 0.5px solid transparent;
+}
+
+a:hover,
+a.active,
+li.active a {
+  outline: 2px solid currentColor;
+}
+
+a:hover {
+  background: rgba(var(--alt), 0.25);
+}
+
+.fade-a {
+  animation: fade-swap 8s infinite;
+  animation-delay: -4s;
+  opacity: 1;
+}
+
+.fade-b {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 0 6px;
+  opacity: 0;
+  animation: fade-swap 8s infinite;
+}
+
+.pip-head .fade-b {
+  padding: 0 10px;
+}
+
+.border-style {
+  border: 3px solid rgb(var(--main));
+  border-width: 2px;
+  text-shadow: 0rem 0.2rem 1rem currentColor;
+}
+
+.underline-border {
+  @media (min-width: 1024px) {
+    border-bottom: 3px solid rgb(var(--main));
+    border-bottom-width: 2px;
+    text-shadow: 0rem 0.2rem 1rem currentColor;
+  }
+}
+
+.text-primary {
+  color: rgb(var(--main));
+}
+
+.text-secondary {
+  color: rgb(var(--alt));
+}
+
+.bg-primary {
+  background-color: rgb(var(--main));
+}
+
+.bg-secondary {
+  background-color: rgb(var(--alt));
+}
+
+.box-glow:hover {
+  outline: 2px solid currentColor;
+  background: rgba(var(--alt), 0.25);
+  cursor: pointer;
+}
+
+/* Add this CSS to your stylesheet or a styled-component */
+.smallbox {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.border-primary {
+  border: rgb(var(--main));
+}
+
+.smallbox::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  /* Adjusted left position */
+  top: 8px;
+  /* Adjusted top position */
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid transparent;
+  /* Adjusted border thickness */
+  background-color: transparent;
+  /* Transparent background */
+  transform: translateX(-50%);
+
+}
+
+@media (max-width: 1024px) {
+  .smallbox::before {
+    top: 6px;
+  }
+}
+
+
+.smallbox:hover::before {
+  border-color: currentColor;
+  /* Changes border color on hover */
+}
+
+.smallbox.active::before {
+  background: currentColor;
+  outline-color: currentColor;
+}
+
+.inactive {
+  color: rgb(var(--alt));
+  pointer-events: none;
+}
+
+@media (max-width: 500px) and (max-height: 2000px) {
+  .chat-container {
+    height: 85%;
+    top: 5%;
+    font-size: x-small;
+  }
+}
+
+.info-table p {
+  float: left;
+  margin-left: 1.3%;
+  margin-bottom: 3px;
+  padding: 4px 6px;
+  width: 55%;
+  position: relative;
+  border-top: 2px solid;
+}
+
+.info-table p::after {
+  box-sizing: border-box;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom,
+      rgb(var(--main)) 0%,
+      rgba(0, 0, 0, 0) 100%);
+}

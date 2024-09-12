@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "USA-DC",
+      "properties": {
+        "message": "I live in the DC metro area, so naturally, I visit DC a lot. I have been to the Capitol, the Washington Monument, and a decent number of museums, including Planet Word, which I thought was pretty cool. I’ve had a lot of good food, especially in the Georgetown area. ",
+        "name": "District of Columbia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-77.035264, 38.993869],
+            [-76.909294, 38.895284],
+            [-77.040741, 38.791222],
+            [-77.117418, 38.933623],
+            [-77.035264, 38.993869]
+          ]
+        ]
+      }
+    }
+  ]
+}
