@@ -83,9 +83,9 @@ export const Radio = ({
         <div className='tab-pane fade h-full'>
             <HudBar title="Radio" />
             <div className='pip-body'>
-                <div className='flex p-1 overflow-hidden md:flex-row flex-col absolute left-1 right-1 bottom-12 2xl:bottom-3 top-7 2xl:top-7'>
-                    <div className='w-2/5 flex flex-col'>
-                        <div className='h-fit mb-5'>
+                <div className='flex p-1 overflow-hidden md:flex-row flex-col justify-between absolute left-1 right-1 bottom-12 2xl:bottom-3 top-7 2xl:top-7'>
+                    <div className='md:w-2/5 max-sm:h-[40%] h-[50%] md:h-full flex flex-col flex-grow'>
+                        <div className='h-fit lg:mb-5 mb-1'>
                             <Option
                                 active={active}
                                 handleActive={handleActive}
@@ -104,13 +104,13 @@ export const Radio = ({
                             ))}
                         </div>
                     </div>
-                    <div className='w-3/5 flex flex-col'>
+                    <div className='md:w-3/5 flex flex-col flex-shrink-0'>
                         <div className='h-2/3 flex justify-center items-center'>
-                            <img src={testimg} alt="" className='w-[18rem] h-fit' />
+                            <img src={testimg} alt="" className='lg:w-[18rem] w-[15rem] h-fit' />
                         </div>
                         <div className='h-1/3 flex flex-col'>
                             <div className='h-1/2 flex flex-row justify-center text-2xl'>
-                                <div className='flex flex-row justify-between items-center w-[50%]'>
+                                <div className='flex flex-row justify-between items-center lg:w-[50%]'>
                                     <LiaRandomSolid size={40} />
                                     <BiSkipPreviousCircle size={40} onClick={playPreviousSong} className="cursor-pointer" />
                                     {isPlaying ? (
@@ -149,8 +149,8 @@ export const Radio = ({
 
 const Option = ({ active, handleActive }) => {
     return (
-        <ul>
-            {['Jazz Music Radio', 'Classical Music Radio', 'Oldies Radio'].map((item, index) => (
+        <ul className='md:text-base text-xs flex md:flex-col flex-row justify-between md:justify-start w-full'>
+            {['Jazz', 'Classical', 'Oldies'].map((item, index) => (
                 <li
                     key={index}
                     className={`box-glow smallbox ${active === index ? 'active' : ''} py-0.5 my-1 cursor-pointer`}

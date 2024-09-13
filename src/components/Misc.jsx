@@ -45,7 +45,7 @@ export const Misc = () => {
 
 const Options = ({ active, handleActive }) => {
     return (
-        <ul className="lg:text-base text-sm flex lg:flex-col flex-row justify-between lg:justify-start w-full">
+        <ul className="lg:text-base text-xs flex lg:flex-col flex-row justify-between lg:justify-start w-full">
             {['Themes', 'H#cK m3', 'Map'].map((item, index) => (
                 <li
                     key={index}
