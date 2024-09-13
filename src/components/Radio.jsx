@@ -84,7 +84,7 @@ export const Radio = ({
             <HudBar title="Radio" />
             <div className='pip-body'>
                 <div className='flex p-1 overflow-hidden md:flex-row flex-col absolute left-1 right-1 bottom-12 2xl:bottom-3 top-7 2xl:top-7'>
-                    <div className='md:w-2/5 max-sm:h-[40%] h-[50%] md:h-full flex flex-col flex-grow'>
+                    <div className='md:w-2/5 max-sm:h-[40%] h-[50%] md:h-full flex flex-col'>
                         <div className='h-fit lg:mb-5 mb-1'>
                             <Option
                                 active={active}
@@ -104,7 +104,7 @@ export const Radio = ({
                             ))}
                         </div>
                     </div>
-                    <div className='md:w-3/5 flex flex-col flex-shrink-0'>
+                    <div className='md:w-3/5 flex flex-col'>
                         <div className='h-2/3 flex justify-center items-center'>
                             <img src={testimg} alt="" className='lg:w-[18rem] w-[15rem] h-fit' />
                         </div>
