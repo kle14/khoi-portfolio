@@ -106,7 +106,7 @@ export const Radio = ({
                     </div>
                     <div className='md:w-3/5 flex flex-col max-md:h-full'>
                         <div className='h-2/3 flex justify-center items-center'>
-                            <img src={testimg} alt="" className='w-[15rem] h-[15rem]' />
+                            <img src={testimg} alt="" className='w-[15rem] h-[15rem] lg:w-[18rem] lg:h-[18rem]' />
                         </div>
                         <div className='h-1/3 flex flex-col'>
                             <div className='h-1/2 flex flex-row justify-center text-2xl'>
