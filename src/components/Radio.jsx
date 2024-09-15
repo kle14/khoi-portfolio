@@ -19,7 +19,11 @@ export const Radio = ({
     playNextSong,
     audioRef,
     handlePlaylistChange,
-    currentPlaylist
+    currentPlaylist,
+    isRandom,
+    toggleRandom,
+    isRepeat,
+    toggleRepeat
 }) => {
     const [active, setActive] = useState(() => {
         switch (currentPlaylist) {
@@ -111,7 +115,11 @@ export const Radio = ({
                         <div className='h-1/3 flex flex-col'>
                             <div className='h-1/2 flex flex-row justify-center text-2xl'>
                                 <div className='flex flex-row justify-between items-center lg:w-[50%]'>
-                                    <LiaRandomSolid size={40} />
+                                    <LiaRandomSolid
+                                        size={40}
+                                        onClick={toggleRandom}
+                                        className={`cursor-pointer ${isRandom ? 'text-primary' : 'text-secondary'}`}
+                                    />
                                     <BiSkipPreviousCircle size={40} onClick={playPreviousSong} className="cursor-pointer" />
                                     {isPlaying ? (
                                         <FaRegCirclePause size={45} onClick={togglePlayPause} className="cursor-pointer" />
@@ -119,7 +127,11 @@ export const Radio = ({
                                         <FaRegCirclePlay size={45} onClick={togglePlayPause} className="cursor-pointer" />
                                     )}
                                     <BiSkipNextCircle size={40} onClick={playNextSong} className="cursor-pointer" />
-                                    <MdLoop size={40} />
+                                    <MdLoop
+                                        size={40}
+                                        onClick={toggleRepeat}
+                                        className={`cursor-pointer ${isRepeat ? 'text-primary' : 'text-secondary'}`}
+                                    />
                                 </div>
                             </div>
                             <div className='h-1/2 flex flex-col justify-center items-center'>

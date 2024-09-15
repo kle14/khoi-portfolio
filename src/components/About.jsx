@@ -6,39 +6,48 @@ const initialBotMessages = ["Hello! I'm Khoi Le, how can I help you today?"];
 const messages = [
   {
     user: "Can you tell me a little bit about yourself?",
-    bot: "I am currently a student at George Mason University studying Computer Science. I am currently working as an IT Assistant at the Roy Rosenzweig Center for History and New Media and teaching assistant both based at the university. I am passionate about software development and enjoy working on web and software projects. I am also a tech enthusiast and enjoy learning about new technologies.",
+    bot: `I am currently a student at George Mason University, studying Computer Science. For my job, I work as a Web Developer Intern at Leidos, Inc. and have been working there since June 2024. I am passionate about software development and enjoy working on web and software projects. My portfolio is the most recent project I have been working on. In my free time, I like to work out, play basketball, and code. I am also a big fan of music and am learning to play the guitar. Thank you for checking out my website, and feel free to ask me any other questions!
+          `,
   },
   {
     user: "What are some fun facts about you?",
-    bot: "I was the winner of a chess competition for the county when I was young.",
+    bot: "I was the winner of a chess competition for the county when I was in elementary school. Though I don't play it as much anymore.",
   },
   {
     user: "What are your future goals or aspirations?",
-    bot: "I aspire to become a tech lead and work on innovative projects.",
+    bot: `Currently, I am working to gain more experience in the field of software development and web development. Later down the line, I would like to start my own business focused on creating software solutions for businesses and individuals. I am also interested in the prospect of becoming a freelance developer.
+          `,
   },
   {
-    user: "Can you describe your role as an IT Assistant",
-    bot: "As an IT Assistant, I provide technology support to the staff and faculty at the center. I also helped prototyping and developing web applications and pipelines mainly using Django, as well as, maintaining and updating the center's multiple websites using technologies such as OWASP, Uptime Kuma, and PostgreSQL.",
+    user: "Can you describe your role as an Web Developer Intern at Leidos, Inc?",
+    bot: `As a Web Developer Intern, I work in a team of four to develop and maintain web applications for the company's clients. I am responsible for fixing bugs and primarily implementing new features. I also work closely with the design team to ensure that the applications are user-friendly and visually appealing.
+         `,
   },
   {
     user: "What is your favorite programming language?",
-    bot: "I love working with Javascript. It is versatile and can be used for both front-end and back-end development and an easy language to learn. I also enjoy working with Python for its simplicity and readability.",
+    bot: `I love working with Javascript and Python because it is easy to use and I have been using them for the majority of my projects and my professional work.
+          I also enjoy working with Java and C, which have been taught in my classes.
+          `,
   },
   {
     user: "What is your favorite technology stack?",
-    bot: "Currently, I enjoy working with the MERN stack though I have more experience working with Django.",
+    bot: "I enjoy working with Django the most because I have been exposed to it in the early days and have been using it for my work.",
   },
   {
     user: "What specific web or software projects have you worked on?",
-    bot: "I have worked on a variety of web and software projects, including a fitness web application, a chatbot, and a personal portfolio website and a link checker web application.",
+    bot: `I have worked on a variety of web and software projects, 
+          including a fitness web application, a chatbot, a link checker and most recently, my personal
+          portfolio website. All of these projects can be found on my GitHub page.
+          `,
   },
   {
     user: "What are your favorite projects?",
-    bot: "My favorite project is the one you are currently viewing and Motion Matrix.",
+    bot: "My favorite project is the one you are currently viewing.",
   },
   {
     user: "What made you choose to study Computer Science?",
-    bot: "I have always been interested in technology and computers. I enjoy problem-solving and creating things, so Computer Science was a natural choice for me. I also wanted to learn more about software development and programming languages.",
+    bot: `As a kid, I was always interested in technology and often found myself taking apart electronic toys to figure out how they worked. After moving to America, my access to tools and equipment became limited, which led me to discover my interest in technology through using computers. I started coding as a hobby and discovered that it was one of those hobbies I could improve at with no expense. I began to enjoy coding, which ultimately led to my decision to study Computer Science.
+          `,
   },
   {
     user: "What programming languages are you proficient in?",
@@ -50,7 +59,8 @@ const messages = [
   },
   {
     user: "How do you approach problem-solving in your projects?",
-    bot: "I usually start by understanding the problem and breaking it down into smaller parts. I then research and brainstorm possible solutions and choose the best one. I also like to collaborate with others and get feedback on my ideas.",
+    bot: `I usually start by understanding the problem and breaking it down into smaller parts. 
+          I then research and brainstorm possible solutions and choose the best one. I also like to collaborate with others and get feedback on my ideas.`,
   },
 ];
 
@@ -277,7 +287,7 @@ const BotMessage = ({ text }) => {
         <div className="flex- w-fit text-style border-style md:max-w-[50%] p-2">
           <ReactTyped
             strings={[concatenatedText]}
-            typeSpeed={10}
+            typeSpeed={3}
             className="text-style"
             onComplete={(self) => self.cursor.remove()}
           />
@@ -291,7 +301,7 @@ const BotMessage = ({ text }) => {
         <div className="flex- w-fit text-style p-2">
           <ReactTyped
             strings={[concatenatedText]}
-            typeSpeed={10}
+            typeSpeed={3}
             className="text-style"
             onComplete={(self) => self.cursor.remove()}
           />

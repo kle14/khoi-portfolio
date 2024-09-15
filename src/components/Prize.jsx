@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Prize = ({ onBack }) => {
+export const Prize = ({ onBack }) => {
     const [quote, setQuote] = React.useState('');
     const [image, setImage] = React.useState('');
 

@@ -18,8 +18,8 @@ const PipBoy = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [hasInteractedWithRadio, setHasInteractedWithRadio] = useState(false);
-
-
+  const [isRandom, setIsRandom] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
 
   const playSong = useCallback(async (song, index) => {
     setCurrentSong(song);
@@ -37,15 +37,43 @@ const PipBoy = () => {
     }
   }, []);
 
-  const playNextSong = useCallback(() => {
+  const toggleRandom = useCallback(() => {
+    setIsRandom(prev => !prev);
+  }, []);
+
+  const toggleRepeat = useCallback(() => {
+    setIsRepeat(prev => !prev);
+  }, []);
+
+  const playRandomSong = useCallback(() => {
     const currentPlaylistSongs = playlists[currentPlaylist];
-    const newIndex = (currentIndex + 1) % currentPlaylistSongs.length;
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * currentPlaylistSongs.length);
+    } while (newIndex === currentIndex && currentPlaylistSongs.length > 1);
     playSong(currentPlaylistSongs[newIndex], newIndex);
   }, [currentIndex, playlists, currentPlaylist, playSong]);
 
+  const playNextSong = useCallback(() => {
+    if (isRandom) {
+      playRandomSong();
+    } else {
+      const currentPlaylistSongs = playlists[currentPlaylist];
+      const newIndex = (currentIndex + 1) % currentPlaylistSongs.length;
+      playSong(currentPlaylistSongs[newIndex], newIndex);
+    }
+  }, [isRandom, playRandomSong, playlists, currentPlaylist, currentIndex, playSong]);
+
   const handleSongEnd = useCallback(() => {
-    playNextSong();
-  }, [playNextSong]);
+    if (isRepeat) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else if (isRandom) {
+      playRandomSong();
+    } else {
+      playNextSong();
+    }
+  }, [isRepeat, isRandom, playRandomSong, playNextSong]);
 
   useEffect(() => {
     const setVh = () => {
@@ -176,6 +204,10 @@ const PipBoy = () => {
               audioRef={audioRef}
               handlePlaylistChange={handlePlaylistChange}
               currentPlaylist={currentPlaylist}
+              isRandom={isRandom}
+              toggleRandom={toggleRandom}
+              isRepeat={isRepeat}
+              toggleRepeat={toggleRepeat}
             />
           </div>
           <div className="piece glow noclick"></div>
@@ -215,7 +247,12 @@ const ContentWrapper = ({
   playNextSong,
   audioRef,
   handlePlaylistChange,
-  currentPlaylist
+  currentPlaylist,
+  isRandom,
+  toggleRandom,
+  isRepeat,
+  toggleRepeat
+
 }) => {
   return (
     <div className="w-full h-full">
@@ -236,6 +273,10 @@ const ContentWrapper = ({
           audioRef={audioRef}
           handlePlaylistChange={handlePlaylistChange}
           currentPlaylist={currentPlaylist}
+          isRandom={isRandom}
+          toggleRandom={toggleRandom}
+          isRepeat={isRepeat}
+          toggleRepeat={toggleRepeat}
         />
       )}
     </div>

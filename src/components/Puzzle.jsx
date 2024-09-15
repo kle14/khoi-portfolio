@@ -78,7 +78,6 @@ export const Puzzle = ({ resetKey }) => {
   const [countdown, setCountdown] = useState(10);
   const [gameKey, setGameKey] = useState(0);
 
-
   const resetGame = useCallback(() => {
     setGameKey(prevKey => prevKey + 1);
     setWords([]);
@@ -155,7 +154,6 @@ export const Puzzle = ({ resetKey }) => {
 
   const leftColumn = useMemo(() => Array.from({ length: columnHeight }, generateRandomHexValue), []);
   const rightColumn = useMemo(() => Array.from({ length: columnHeight }, generateRandomHexValue), []);
-
 
   useEffect(() => {
     const usedColsFirstHalf = new Set();
@@ -362,7 +360,7 @@ export const Puzzle = ({ resetKey }) => {
   const wordColumns = [column1, column2];
 
   const handleWordClick = useCallback((word) => {
-    if (isLocked) return; // Prevent interactions when locked
+    if (isLocked) return;
 
     if (word.toLowerCase() === correct.toLowerCase()) {
       setOutputContent(prev => [...prev, "Entry Granted"]);

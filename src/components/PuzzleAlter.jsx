@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaDeleteLeft } from "react-icons/fa6";
+import { Prize } from './Prize';
 
 const deleteIcon = <FaDeleteLeft />;
 
@@ -21,6 +22,7 @@ export const PuzzleAlter = () => {
     const [currentRow, setCurrentRow] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [keyboardStatus, setKeyboardStatus] = useState({});
+    const [showPrize, setShowPrize] = useState(false);
     const solutionRef = useRef('');
 
     useEffect(() => {
@@ -58,6 +60,7 @@ export const PuzzleAlter = () => {
                 if (currentGuess === solutionRef.current) {
                     setMessage('Congratulations! You guessed the word!');
                     setGameOver(true);
+                    setShowPrize(true);
                 } else if (currentRow === 5) {
                     setMessage(`Game over. The word was ${solutionRef.current}.`);
                     setGameOver(true);
@@ -97,11 +100,26 @@ export const PuzzleAlter = () => {
                 return '';
         }
     };
+    const handleBackFromPrize = () => {
+        setShowPrize(false);
+        setGuesses(Array(6).fill(''));
+        setCurrentGuess('');
+        setMessage('');
+        setCurrentRow(0);
+        setGameOver(false);
+        setKeyboardStatus({});
+        solutionRef.current = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+    };
+
+    if (showPrize) {
+        return <Prize onBack={handleBackFromPrize} />;
+    }
 
     return (
         <div className="sm:p-4 flex flex-col items-center h-full justify-between">
             <h1 className="text-2xl font-bold mb-4">Guess the word</h1>
-            <div className="mb-4">
+            <div className="mb-4"
+            >
                 {guesses.map((guess, i) => (
                     <div key={i} className="flex mb-2">
                         {Array.from({ length: 5 }).map((_, j) => (
