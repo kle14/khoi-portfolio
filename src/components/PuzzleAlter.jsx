@@ -125,7 +125,7 @@ export const PuzzleAlter = () => {
                         {Array.from({ length: 5 }).map((_, j) => (
                             <div
                                 key={j}
-                                className={`w-14 max-ssm:w-11 h-14 max-ssm:h-11 border-style rounded-lg flex items-center justify-center mr-1 ipad:h-20 ipad:w-20 ipad:mr-3 text-2xl font-bold ${getLetterBackgroundColor(guess[j], j, i)}`}
+                                className={`w-14 max-ssm:w-11 h-14 max-ssm:h-11 border-style rounded-lg flex items-center justify-center mr-1 ipad:h-15 ipad:w-15 ipad:mr-3 text-2xl font-bold ${getLetterBackgroundColor(guess[j], j, i)}`}
                             >
                                 {i === currentRow ? currentGuess[j] || '' : guess[j] || ''}
                             </div>
@@ -149,7 +149,7 @@ export const PuzzleAlter = () => {
                     </div>
                 ))}
             </div>
-            {message && <p className="sm:text-lg">{message}</p>}
+            {/* {message && <p className="sm:text-lg">{message}</p>} */}
         </div>
     );
 };

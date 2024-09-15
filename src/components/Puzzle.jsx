@@ -51,15 +51,15 @@ const generateRandomHexValue = () => {
 };
 
 const generateGarbageCharacters = () => {
-  let garbage = "";
+  const rows = [];
   for (let y = 0; y < columnHeight; y++) {
+    const row = [];
     for (let x = 0; x < wordColumnWidth; x++) {
-      garbage += generateRandomSpecialChar();
+      row.push(generateRandomSpecialChar());
     }
-    garbage += "\n";
+    rows.push(row.join(''));
   }
-  garbage = garbage.trim();
-  return garbage;
+  return rows.join('\n');
 };
 
 
@@ -76,10 +76,9 @@ export const Puzzle = ({ resetKey }) => {
   const [showPrize, setShowPrize] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [countdown, setCountdown] = useState(10);
-  const [gameKey, setGameKey] = useState(0);
+  const [internalResetKey, setInternalResetKey] = useState(0);
 
   const resetGame = useCallback(() => {
-    setGameKey(prevKey => prevKey + 1);
     setWords([]);
     setBracketsets([]);
     setCorrect("");
@@ -92,7 +91,12 @@ export const Puzzle = ({ resetKey }) => {
     setShowPrize(false);
     setIsLocked(false);
     setCountdown(10);
+    setInternalResetKey(prev => prev + 1);
   }, []);
+
+  useEffect(() => {
+    resetGame();
+  }, [resetKey, resetGame]);
 
   useEffect(() => {
     let timer;
@@ -150,7 +154,7 @@ export const Puzzle = ({ resetKey }) => {
 
     setBracketsets(generateBracketSets(maxBracketSets));
     fetchWords();
-  }, [gameKey]);
+  }, [internalResetKey]);
 
   const leftColumn = useMemo(() => Array.from({ length: columnHeight }, generateRandomHexValue), []);
   const rightColumn = useMemo(() => Array.from({ length: columnHeight }, generateRandomHexValue), []);
@@ -503,9 +507,9 @@ export const Puzzle = ({ resetKey }) => {
     setOutputContent(prev => [...prev, char]);
   };
 
-  const handleBackToPuzzle = () => {
-    setShowPrize(false);
-  };
+  const handleBackToPuzzle = useCallback(() => {
+    resetGame();
+  }, [resetGame]);
 
   return (
     <div className='h-full w-full font-mono'>
