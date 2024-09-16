@@ -4,6 +4,9 @@ import Home from "./Home";
 import { Quests } from "./Quests";
 import { Misc } from "./Misc";
 import { Radio } from "./Radio";
+import clickSound from '../assets/pipboy-select-101soundboards.mp3';
+import Cursor from "./Cursor";  // Import the new Cursor component
+
 
 const PipBoy = () => {
   const [activeItem, setActiveItem] = useState("HOME");
@@ -20,6 +23,25 @@ const PipBoy = () => {
   const [hasInteractedWithRadio, setHasInteractedWithRadio] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
+  const clickAudioRef = useRef(new Audio(clickSound));
+
+  const playClickSound = useCallback(() => {
+    clickAudioRef.current.currentTime = 0; // Reset the audio to the beginning
+    clickAudioRef.current.play();
+  }, []);
+
+  useEffect(() => {
+    const handleClick = () => {
+      playClickSound();
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [playClickSound]);
+
 
   const playSong = useCallback(async (song, index) => {
     setCurrentSong(song);
@@ -161,7 +183,8 @@ const PipBoy = () => {
 
   return (
     <body>
-      <div id="frame" className="frame">
+      <Cursor />  {/* Add the Cursor component here */}
+      <div id="frame" className="frame" onClick={playClickSound}>
         <div className="piece output">
           <div className="pipboy">
             <ul className="pip-foot">

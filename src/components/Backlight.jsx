@@ -1,50 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 export const Backlight = () => {
-    const colors = ['Amber', 'Red', 'Green', 'Blue', 'Yellow', 'Purple'];
+    const colors = useMemo(() => ['Amber', 'Red', 'Green', 'Blue', 'Yellow', 'White'], []);
 
-    const colorValues = {
+    const colorValues = useMemo(() => ({
         amber: { main: '255, 170, 60', alt: '128, 75, 20' },
         red: { main: '255, 0, 0', alt: '128, 0, 0' },
         green: { main: '0, 255, 0', alt: '0, 128, 0' },
         blue: { main: '50, 150, 255', alt: '20, 80, 160' },
         yellow: { main: '255, 255, 0', alt: '128, 128, 0' },
-        purple: { main: '128, 0, 128', alt: '64, 0, 64' },
-        default: { main: '255, 255, 255', alt: '128, 128, 128' }
-    };
+        white: { main: '255, 255, 255', alt: '128, 128, 128' }
+    }), []);
 
-    const getColorValues = (color) => colorValues[color.toLowerCase()] || colorValues.default;
+    const getColorValues = useCallback((color) => colorValues[color.toLowerCase()], [colorValues]);
 
-    const getInitialIndex = () => {
+    const getInitialIndex = useCallback(() => {
         const currentColor = document.documentElement.style.getPropertyValue('--main').trim();
-        const colorToIndex = {
-            '255, 170, 60': 0,
-            '255, 0, 0': 1,
-            '0, 255, 0': 2,
-            '50, 150, 255': 3,
-            '255, 255, 0': 4,
-            '128, 0, 128': 5
-        };
-        return colorToIndex[currentColor] ?? 0;
-    };
+        const colorToIndex = Object.keys(colorValues).findIndex(color => colorValues[color].main === currentColor);
+        return colorToIndex !== -1 ? colorToIndex : 0;
+    }, [colorValues]);
 
-    const [active, setActive] = useState(getInitialIndex());
+    const [active, setActive] = useState(() => getInitialIndex());
 
-    const handleActive = (index, color) => {
-        setActive(index);
-        changeRootColor(color);
-    };
-
-    const changeRootColor = (color) => {
+    const changeRootColor = useCallback((color) => {
         const root = document.documentElement;
-        const { main, alt } = getColorValues(color);
+        const lowerCaseColor = color.toLowerCase();
+        const { main, alt } = getColorValues(lowerCaseColor);
         root.style.setProperty('--main', main);
         root.style.setProperty('--alt', alt);
-    };
+        root.className = lowerCaseColor; // Set the class name for the root element
+    }, [getColorValues]);
+
+    const handleActive = useCallback((index, color) => {
+        setActive(index);
+        changeRootColor(color);
+    }, [changeRootColor]);
 
     useEffect(() => {
         setActive(getInitialIndex());
-    }, []);
+        const initialColor = colors[getInitialIndex()];
+        changeRootColor(initialColor);
+    }, [getInitialIndex, colors, changeRootColor]);
 
     return (
         <div className='w-full h-full'>
