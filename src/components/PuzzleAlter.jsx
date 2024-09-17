@@ -116,7 +116,7 @@ export const PuzzleAlter = () => {
     }
 
     return (
-        <div className="sm:p-4 flex flex-col items-center h-full justify-between">
+        <div className="sm:p-4 flex flex-col items-center h-full justify-between overflow-y-scroll">
             <h1 className="text-2xl font-bold mb-4">Guess the word</h1>
             <div className="mb-4"
             >

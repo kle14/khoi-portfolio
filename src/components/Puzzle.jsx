@@ -522,13 +522,13 @@ export const Puzzle = ({ resetKey }) => {
             {isLocked && <span> | Locked. Resetting in {countdown} seconds</span>}
           </div>
           <div className={`w-full h-[90%] flex ${isLocked ? 'opacity-50 pointer-events-none' : ''}`}>
-            <div className='w-[40%] flex'>
-              <div className='w-fit mr-4'>
+            <div className='w-2/5 flex'>
+              <div className='w-1/4 mr-4'>
                 {leftColumn.map((value, index) => (
                   <p key={index}>{value}</p>
                 ))}
               </div>
-              <div className='flex-1'>
+              <div className='w-3/4'>
                 {wordColumns[0].map((row, rowIndex) => (
                   <div key={`row-${rowIndex}`} className="flex">
                     {row.map((char, charIndex) =>
@@ -546,13 +546,13 @@ export const Puzzle = ({ resetKey }) => {
                 ))}
               </div>
             </div>
-            <div className='w-[40%] flex'>
-              <div className='w-fit mr-4'>
+            <div className='w-2/5 flex'>
+              <div className='w-1/4 mr-4'>
                 {rightColumn.map((value, index) => (
                   <p key={index}>{value}</p>
                 ))}
               </div>
-              <div className='flex-1'>
+              <div className='w-3/4'>
                 {wordColumns[1].map((row, rowIndex) => (
                   <div key={`row-${rowIndex}`} className="flex">
                     {row.map((char, charIndex) =>
@@ -570,7 +570,7 @@ export const Puzzle = ({ resetKey }) => {
                 ))}
               </div>
             </div>
-            <div className='w-[25%]'>
+            <div className='w-1/5'>
               <div className="output-box overflow-y-scroll flex flex-col-reverse h-[calc(100%-14px)]">
                 <div>
                   {outputContent.slice().map((content, index) => (
