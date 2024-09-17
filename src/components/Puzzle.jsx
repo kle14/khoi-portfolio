@@ -129,7 +129,7 @@ export const Puzzle = ({ resetKey }) => {
         let selectedWords;
         do {
           shuffledWords = allWords.sort(() => 0.5 - Math.random());
-          selectedWords = shuffledWords.slice(0, 13);
+          selectedWords = shuffledWords.slice(0, 12);
 
           for (let i = 0; i < selectedWords.length; i++) {
             if (selectedWords[i].length > 16) {
