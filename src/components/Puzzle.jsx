@@ -14,7 +14,7 @@ const bracketsets = [
   "()",
 ]
 
-const columnHeight = 14;
+const columnHeight = 16;
 const wordColumnWidth = 16;
 const maxBracketSets = 7;
 const generateRandomSpecialChar = () => {
