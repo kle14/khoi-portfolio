@@ -512,12 +512,12 @@ export const Puzzle = ({ resetKey }) => {
   }, [resetGame]);
 
   return (
-    <div className='h-full w-full font-mono'>
+    <div className='h-full w-full font-mono text-sm'>
       {showPrize ? (
         <Prize onBack={handleBackToPuzzle} />
       ) : (
         <>
-          <div className='h-[10%] w-full'>
+          <div className='h-[9%] w-full'>
             Attempts remaining: {attemptsRemaining}
             {isLocked && <span> | Locked. Resetting in {countdown} seconds</span>}
           </div>
