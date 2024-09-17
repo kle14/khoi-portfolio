@@ -129,7 +129,7 @@ export const Puzzle = ({ resetKey }) => {
         let selectedWords;
         do {
           shuffledWords = allWords.sort(() => 0.5 - Math.random());
-          selectedWords = shuffledWords.slice(0, 12);
+          selectedWords = shuffledWords.slice(0, 13);
 
           for (let i = 0; i < selectedWords.length; i++) {
             if (selectedWords[i].length > 16) {
@@ -517,7 +517,7 @@ export const Puzzle = ({ resetKey }) => {
         <Prize onBack={handleBackToPuzzle} />
       ) : (
         <>
-          <div className='h-[9%] w-full'>
+          <div className='h-[8%] w-full'>
             Attempts remaining: {attemptsRemaining}
             {isLocked && <span> | Locked. Resetting in {countdown} seconds</span>}
           </div>
