@@ -570,7 +570,7 @@ export const Puzzle = ({ resetKey }) => {
                 ))}
               </div>
             </div>
-            <div className='w-1/5'>
+            <div className='w-1/5 text-xs'>
               <div className="output-box overflow-y-scroll flex flex-col-reverse h-full">
                 <div>
                   {outputContent.slice().map((content, index) => (
