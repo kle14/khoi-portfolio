@@ -521,7 +521,7 @@ export const Puzzle = ({ resetKey }) => {
             Attempts remaining: {attemptsRemaining}
             {isLocked && <span> | Locked. Resetting in {countdown} seconds</span>}
           </div>
-          <div className={`w-full h-[90%] flex ${isLocked ? 'opacity-50 pointer-events-none' : ''}`}>
+          <div className={`w-full flex-1 flex ${isLocked ? 'opacity-50 pointer-events-none' : ''}`}>
             <div className='w-2/5 flex'>
               <div className='w-1/4 mr-4'>
                 {leftColumn.map((value, index) => (
@@ -571,7 +571,7 @@ export const Puzzle = ({ resetKey }) => {
               </div>
             </div>
             <div className='w-1/5'>
-              <div className="output-box overflow-y-scroll flex flex-col-reverse h-[calc(100%-14px)]">
+              <div className="output-box overflow-y-scroll flex flex-col-reverse h-full">
                 <div>
                   {outputContent.slice().map((content, index) => (
                     <p key={index}>{"> " + content}</p>
