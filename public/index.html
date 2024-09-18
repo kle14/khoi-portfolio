@@ -27,51 +27,6 @@
     <title>Khoi Le Portfolio</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
-  <script>
-    function getDisplayScaling() {
-      // Get the device pixel ratio
-      const pixelRatio = window.devicePixelRatio || 1;
-
-      // Get the screen's physical pixels
-      const screenWidth = window.screen.width * pixelRatio;
-      const screenHeight = window.screen.height * pixelRatio;
-
-      // Get the window's logical pixels
-      const logicalWidth = window.innerWidth;
-      const logicalHeight = window.innerHeight;
-
-      // Calculate the scaling factor
-      const scalingFactor = (logicalWidth / screenWidth) * 100;
-
-      return {
-        pixelRatio,
-        physicalResolution: `${screenWidth}x${screenHeight}`,
-        logicalResolution: `${logicalWidth}x${logicalHeight}`,
-        scalingPercentage: `${scalingFactor.toFixed(2)}%`,
-      };
-    }
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
-    const screenResolution = screenWidth * screenHeight;
-
-    const displayInfo = getDisplayScaling();
-    console.log("Display Pixel Ratio:", displayInfo.pixelRatio);
-    console.log(`Total pixels: ${screenResolution}`);
-    console.log("Physical Resolution:", displayInfo.physicalResolution);
-    console.log("Logical Resolution:", displayInfo.logicalResolution);
-    console.log("Scaling Percentage:", displayInfo.scalingPercentage);
-  </script>
 </html>

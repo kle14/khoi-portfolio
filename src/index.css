@@ -38,7 +38,7 @@
 }
 
 
-body {
+.bbody {
   background: black;
   color: rgb(var(--main));
   font-family: "Roboto Mono", monospace;

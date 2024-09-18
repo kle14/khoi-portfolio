@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { HudBar } from './HudBar';
 import testimg from './../assets/vinyl.gif'
-import { FaRegCirclePause } from "react-icons/fa6";
+import { FaRegCirclePause, FaRegCirclePlay } from "react-icons/fa6";
 import { LiaRandomSolid } from "react-icons/lia";
-import { BiSkipNextCircle } from "react-icons/bi";
-import { BiSkipPreviousCircle } from "react-icons/bi";
+import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
 import { MdLoop } from "react-icons/md";
-import { FaRegCirclePlay } from "react-icons/fa6";
+import { useRadio } from './RadioContext';  // Import the useRadio hook
 
-export const Radio = ({
-    songs,
-    currentSong,
-    currentIndex,
-    isPlaying,
-    playSong,
-    togglePlayPause,
-    playPreviousSong,
-    playNextSong,
-    audioRef,
-    handlePlaylistChange,
-    currentPlaylist,
-    isRandom,
-    toggleRandom,
-    isRepeat,
-    toggleRepeat
-}) => {
+export const Radio = () => {
+    const {
+        playlists,
+        currentPlaylist,
+        currentSong,
+        currentIndex,
+        isPlaying,
+        isRandom,
+        isRepeat,
+        audioRef,
+        playSong,
+        togglePlayPause,
+        playNextSong,
+        playPreviousSong,
+        handlePlaylistChange,
+        toggleRandom,
+        toggleRepeat
+    } = useRadio();
+
     const [active, setActive] = useState(() => {
         switch (currentPlaylist) {
             case 'jazz': return 0;
@@ -97,7 +98,7 @@ export const Radio = ({
                         </div>
 
                         <div className='h-full border-style overflow-y-scroll p-2'>
-                            {songs.map((song, index) => (
+                            {playlists[currentPlaylist] && playlists[currentPlaylist].map((song, index) => (
                                 <div
                                     key={index}
                                     className={`text-xs my-0.5 cursor-pointer box-glow p-1 ${currentIndex === index ? 'text-primary' : 'text-secondary'}`}

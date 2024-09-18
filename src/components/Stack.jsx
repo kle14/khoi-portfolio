@@ -100,7 +100,7 @@ export const Stack = () => {
             className='sm:w-[43%] h-full max-smh:mb-8'
 
         >
-            <div className="h-[calc((1/8)*100%)] w-full"></div>
+            <div className="h-[10%] w-full"></div>
             <h1 className="w-full text-center box-glow" onMouseEnter={() => !isMobile && handleGroupInteraction(group)}
                 onClick={() => isMobile && handleGroupInteraction(group)}
                 onMouseLeave={handleMouseLeave}>{groups[group]}</h1>
