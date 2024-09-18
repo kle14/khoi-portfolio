@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import About from "./About";
 import Home from "./Home";
 import { Quests } from "./Quests";
 import { Misc } from "./Misc";
 import { Radio } from "./Radio";
-import clickSound from '../assets/pipboy-select-101soundboards.mp3';
+//import clickSound from '../assets/pipboy-select-101soundboards.mp3';
 import Cursor from "./Cursor";
 import { RadioProvider, useRadio } from "./RadioContext";
 
@@ -18,25 +18,25 @@ const PipBoy = () => {
 
 const PipBoyContent = () => {
   const [activeItem, setActiveItem] = useState("HOME");
-  const clickAudioRef = useRef(new Audio(clickSound));
+  //const clickAudioRef = useRef(new Audio(clickSound));
   const { playSong, playlists, currentPlaylist, hasInteractedWithRadio, setHasInteractedWithRadio } = useRadio();
 
-  const playClickSound = useCallback(() => {
-    clickAudioRef.current.currentTime = 0;
-    clickAudioRef.current.play();
-  }, []);
+  // const playClickSound = useCallback(() => {
+  //   clickAudioRef.current.currentTime = 0;
+  //   clickAudioRef.current.play();
+  // }, []);
 
-  useEffect(() => {
-    const handleClick = () => {
-      playClickSound();
-    };
+  // useEffect(() => {
+  //   const handleClick = () => {
+  //     playClickSound();
+  //   };
 
-    document.addEventListener('click', handleClick);
+  //   document.addEventListener('click', handleClick);
 
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  }, [playClickSound]);
+  //   return () => {
+  //     document.removeEventListener('click', handleClick);
+  //   };
+  // }, [playClickSound]);
 
   useEffect(() => {
     const setVh = () => {
@@ -62,7 +62,7 @@ const PipBoyContent = () => {
   return (
     <div className="bbody">
       <Cursor />
-      <div id="frame" className="frame" onClick={playClickSound}>
+      <div id="frame" className="frame">
         <div className="piece output">
           <div className="pipboy">
             <ul className="pip-foot">

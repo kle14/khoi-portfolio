@@ -5,7 +5,7 @@ import { FaRegCirclePause, FaRegCirclePlay } from "react-icons/fa6";
 import { LiaRandomSolid } from "react-icons/lia";
 import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
 import { MdLoop } from "react-icons/md";
-import { useRadio } from './RadioContext';  // Import the useRadio hook
+import { useRadio } from './RadioContext';
 
 export const Radio = () => {
     const {
@@ -23,7 +23,7 @@ export const Radio = () => {
         playPreviousSong,
         handlePlaylistChange,
         toggleRandom,
-        toggleRepeat
+        toggleRepeat,
     } = useRadio();
 
     const [active, setActive] = useState(() => {

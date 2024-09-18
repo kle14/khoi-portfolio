@@ -20,7 +20,6 @@ export const RadioProvider = ({ children }) => {
     const audioRef = useRef(null);
 
 
-
     useEffect(() => {
         const importAll = (r) => {
             return r.keys().map((fileName) => ({
@@ -44,13 +43,21 @@ export const RadioProvider = ({ children }) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (audioRef.current) {
+            if (isRepeat) {
+                audioRef.current.loop = true;
+            } else {
+                audioRef.current.loop = false;
+            }
+        }
+    }, [isRepeat]);
+
     const playSong = useCallback(async (song, index) => {
         setCurrentSong(song);
         setCurrentIndex(index);
         if (audioRef.current) {
-            if (audioRef.current.src !== song.audio) {
-                audioRef.current.src = song.audio;
-            }
+            audioRef.current.src = song.audio;
             try {
                 await audioRef.current.play();
                 setIsPlaying(true);
@@ -61,6 +68,7 @@ export const RadioProvider = ({ children }) => {
             }
         }
     }, []);
+
 
     const togglePlayPause = useCallback(async () => {
         if (audioRef.current) {
@@ -98,15 +106,10 @@ export const RadioProvider = ({ children }) => {
     }, [isRandom, playRandomSong, playlists, currentPlaylist, currentIndex, playSong]);
 
     const playPreviousSong = useCallback(() => {
-        if (isRandom) {
-            playRandomSong();
-        } else {
-            const currentPlaylistSongs = playlists[currentPlaylist];
-            const newIndex = (currentIndex - 1 + currentPlaylistSongs.length) % currentPlaylistSongs.length;
-            playSong(currentPlaylistSongs[newIndex], newIndex);
-        }
-
-    }, [isRandom, playRandomSong, playlists, currentPlaylist, currentIndex, playSong]);
+        const currentPlaylistSongs = playlists[currentPlaylist];
+        const newIndex = (currentIndex - 1 + currentPlaylistSongs.length) % currentPlaylistSongs.length;
+        playSong(currentPlaylistSongs[newIndex], newIndex);
+    }, [currentIndex, playlists, currentPlaylist, playSong]);
 
     const handlePlaylistChange = useCallback((newPlaylist) => {
         setCurrentPlaylist(newPlaylist);
@@ -135,13 +138,14 @@ export const RadioProvider = ({ children }) => {
     }, [isRepeat, isRandom, playRandomSong, playNextSong]);
 
     useEffect(() => {
-        audioRef.current = new Audio();
-        audioRef.current.addEventListener('ended', handleSongEnd);
+        const audio = audioRef.current;
+        if (audio) {
+            audio.addEventListener('ended', handleSongEnd);
+        }
 
         return () => {
-            if (audioRef.current) {
-                audioRef.current.removeEventListener('ended', handleSongEnd);
-                audioRef.current.pause();
+            if (audio) {
+                audio.removeEventListener('ended', handleSongEnd);
             }
         };
     }, [handleSongEnd]);
@@ -164,7 +168,7 @@ export const RadioProvider = ({ children }) => {
             handlePlaylistChange,
             toggleRandom,
             toggleRepeat,
-            setHasInteractedWithRadio
+            setHasInteractedWithRadio,
         }}>
             {children}
             <audio ref={audioRef} />
