@@ -26,6 +26,21 @@ export const PuzzleAlter = () => {
     const solutionRef = useRef('');
 
     useEffect(() => {
+        resetGame();
+    }, []);
+
+    const resetGame = () => {
+        setGuesses(Array(6).fill(''));
+        setCurrentGuess('');
+        setMessage('');
+        setCurrentRow(0);
+        setGameOver(false);
+        setKeyboardStatus({});
+        solutionRef.current = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+        console.log(solutionRef.current);
+    };
+
+    useEffect(() => {
         solutionRef.current = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
         console.log(solutionRef.current);
     }, []);
@@ -64,6 +79,10 @@ export const PuzzleAlter = () => {
                 } else if (currentRow === 5) {
                     setMessage(`Game over. The word was ${solutionRef.current}.`);
                     setGameOver(true);
+                    // Add a delay before resetting the game
+                    setTimeout(() => {
+                        resetGame();
+                    }, 3000);
                 } else {
                     setCurrentRow(prev => prev + 1);
                     setCurrentGuess('');
@@ -118,6 +137,7 @@ export const PuzzleAlter = () => {
     return (
         <div className="sm:p-4 flex flex-col items-center h-full justify-between overflow-y-scroll">
             <h1 className="text-2xl font-bold mb-4">Guess the word</h1>
+            {message && <p className="sm:text-lg text-xs">{message}</p>}
             <div className="mb-4"
             >
                 {guesses.map((guess, i) => (
@@ -149,7 +169,7 @@ export const PuzzleAlter = () => {
                     </div>
                 ))}
             </div>
-            {/* {message && <p className="sm:text-lg">{message}</p>} */}
+
         </div>
     );
 };
