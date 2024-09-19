@@ -20,6 +20,7 @@ const PipBoy = () => {
 const PipBoyContent = () => {
   const [activeItem, setActiveItem] = useState("HOME");
   //const clickAudioRef = useRef(new Audio(clickSound));
+  const [isMobile, setIsMobile] = useState(false);
   const { playSong, playlists, currentPlaylist, hasInteractedWithRadio, setHasInteractedWithRadio } = useRadio();
 
   // const playClickSound = useCallback(() => {
@@ -51,6 +52,21 @@ const PipBoyContent = () => {
       window.removeEventListener('resize', setVh);
     };
   }, []);
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone'];
+      setIsMobile(mobileKeywords.some(keyword => userAgent.includes(keyword)));
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+
 
   const handleSetActiveItem = useCallback((item) => {
     setActiveItem(item);
@@ -62,7 +78,7 @@ const PipBoyContent = () => {
 
   return (
     <div className="bbody">
-      <Cursor />
+      {!isMobile && <Cursor />}
       <div id="frame" className="frame">
         <div className="piece output">
           <div className="pipboy">
