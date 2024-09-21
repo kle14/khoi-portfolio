@@ -15,7 +15,7 @@ export const Experiences = () => {
             ],
         },
         {
-            title: 'RRCHNM',
+            title: 'Center for History and New Media',
             role: 'IT Assistant',
             duration: 'February 2023 - June 2024',
             summary: 'Prototyped and maintained web applications for the Center, as well as, provided technical support for the staff.',

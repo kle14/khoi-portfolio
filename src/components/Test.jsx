@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import About from "./About";
-//import Home from "./Home";
 import { Quests } from "./Quests";
 import { Misc } from "./Misc";
 import { Radio } from "./Radio";
-import { Home2 } from "./Home2";
+import { Home } from "./Home";
 //import clickSound from '../assets/pipboy-select-101soundboards.mp3';
 import Cursor from "./Cursor";
 import { RadioProvider, useRadio } from "./RadioContext";
@@ -139,7 +138,7 @@ const ContentWrapper = ({ activeItem }) => {
   return (
     <div className="w-full h-full">
       {activeItem === "ABOUT" && <About />}
-      {activeItem === "HOME" && <Home2 />}
+      {activeItem === "HOME" && <Home />}
       {activeItem === "QUESTS" && <Quests />}
       {activeItem === "MISC" && <Misc />}
       {activeItem === "RADIO" && <Radio />}
