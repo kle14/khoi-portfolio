@@ -180,7 +180,7 @@ MMMMMM"___ "_._   MMM"_."" _ """"""
         <div className="tab-pane fade h-full">
             <HudBar title="Home" />
             <div className="pip-body">
-                <div className="flex p-1 overflow-hidden flex-col absolute left-1 right-1 bottom-3 top-7 max-ssm:pb-16">
+                <div className="flex p-1 overflow-hidden flex-col absolute left-1 right-1 bottom-3 top-7 max-sm:pb-16">
                     <p className='w-full text-center h-fit mb-5'>
                         <ReactTyped
                             strings={[
