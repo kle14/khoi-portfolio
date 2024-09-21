@@ -184,7 +184,7 @@ MMMMMM"___ "_._   MMM"_."" _ """"""
                     <p className='w-full text-center h-fit mb-5'>
                         <ReactTyped
                             strings={[
-                                "Welcome to my porfolio <br/> I am Khoi Le <br/> - Web Developer -"
+                                "Welcome to my porfolio <br/> I am Khoi Le <br/> - Computer Science Student -"
                             ]}
                             typeSpeed={10}
                             className="text-center lg:text-base text-xl max-smh:text-base"
