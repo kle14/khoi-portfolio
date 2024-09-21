@@ -214,7 +214,7 @@ MMMMMM"___ "_._   MMM"_."" _ """"""
                                 )}
                             </div>
                         </div>
-                        <div className='lg:w-2/3 max-lg:h-2/3 max-sm:h-1/2 max-lg:w-full flex justify-center items-center' >
+                        <div className='lg:w-2/3 max-lg:h-2/3 max-sm:h-1/2 max-lg:w-full flex justify-center items-center border-style rounded-md' >
                             {showAsciiArt && (
                                 <TypedAsciiArt
                                     arts={asciiArts}

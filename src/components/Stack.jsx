@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const groups = {
     PL: "Languages",
@@ -16,12 +16,6 @@ const groupTagsMap = {
         { name: "HTML", level: 4, frequency: 90 },
         { name: "CSS", level: 4, frequency: 90 },
     ],
-    Misc: [
-        { name: "Git", level: 3, frequency: 80 },
-        { name: "Docker", level: 3, frequency: 50 },
-        { name: "REST", level: 4, frequency: 70 },
-        { name: "Node.js", level: 3, frequency: 60 }
-    ],
     Framework: [
         { name: "React", level: 4, frequency: 80 },
         { name: "TailwindCSS", level: 4, frequency: 70 },
@@ -33,15 +27,24 @@ const groupTagsMap = {
         { name: "PostgreSQL", level: 3, frequency: 70 },
         { name: "MongoDB", level: 2, frequency: 40 },
     ],
+    Misc: [
+        { name: "Git", level: 4, frequency: 80 },
+        { name: "Docker", level: 3, frequency: 50 },
+        { name: "REST", level: 4, frequency: 70 },
+        // { name: "Node.js", level: 3, frequency: 60 },
+        { name: "Selenium", level: 3, frequency: 30 },
+        { name: "Chart.js", level: 3, frequency: 40 },
+        { name: "JavaFX", level: 3, frequency: 30 },
+    ],
 };
 
 const GroupTags = ({ activeGroup, activeTech, groupName, tags }) => {
     return (
-        <div className="flex lg:flex-wrap">
+        <div className="flex flex-wrap mt-2">
             {tags.map((tag, index) => (
                 <span
                     key={index}
-                    className={`md:p-2 p-1 ${(activeGroup === groupName && !activeTech) || activeTech === tag.name
+                    className={`text-xs md:text-sm p-1 md:p-2 m-1 ${(activeGroup === groupName && !activeTech) || activeTech === tag.name
                         ? "text-primary"
                         : "text-secondary"
                         }`}
@@ -53,98 +56,87 @@ const GroupTags = ({ activeGroup, activeTech, groupName, tags }) => {
     );
 };
 
+const AccordionItem = ({ group, tags, isOpen, toggleAccordion, activeGroup, activeTech, handleTechInteraction }) => {
+    const renderLevelIndicators = (level) => {
+        return Array(5).fill(0).map((_, index) => (
+            <div
+                key={index}
+                className={`h-2 w-2 md:h-3 md:w-3 border-style rounded-full mr-1 md:mr-2 ${index < level ? 'bg-current' : 'bg-transparent'
+                    }`}
+            ></div>
+        ));
+    };
+
+    return (
+        <div className="mb-4 border-style rounded">
+            <button
+                className="w-full p-4 text-left flex justify-between items-center box-glow"
+                onClick={toggleAccordion}
+            >
+                <span className="font-semibold">{groups[group]}</span>
+                <span className="text-xl">{isOpen ? '−' : '+'}</span>
+            </button>
+            {isOpen && (
+                <div className="p-4 border-style">
+                    <ul className="space-y-1">
+                        {tags.map(item => (
+                            <li
+                                key={item.name}
+                                className="flex flex-row items-center justify-between text-sm md:text-base p-1 box-glow cursor-pointer"
+                                onMouseEnter={() => handleTechInteraction(group, item.name)}
+                            >
+                                <div className="mr-5">{item.name}</div>
+                                <div className="flex flex-row">
+                                    {renderLevelIndicators(item.level)}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <GroupTags
+                        activeGroup={activeGroup}
+                        activeTech={activeTech}
+                        groupName={group}
+                        tags={tags}
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
 export const Stack = () => {
     const [activeGroup, setActiveGroup] = useState(null);
     const [activeTech, setActiveTech] = useState(null);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkScreenWidth = () => {
-            setIsMobile(window.innerWidth < 640);
-        };
-
-        checkScreenWidth();
-        window.addEventListener('resize', checkScreenWidth);
-
-        return () => window.removeEventListener('resize', checkScreenWidth);
-    }, []);
-
-    const handleGroupInteraction = (group) => {
-        setActiveGroup(group);
-        setActiveTech(null);
-    };
+    const [openAccordions, setOpenAccordions] = useState({});
 
     const handleTechInteraction = (group, tech) => {
         setActiveGroup(group);
         setActiveTech(tech);
     };
 
-    const handleMouseLeave = () => {
-        if (!isMobile) {
-            setActiveGroup(null);
-            setActiveTech(null);
-        }
+    const toggleAccordion = (group) => {
+        setOpenAccordions(prev => ({
+            ...prev,
+            [group]: !prev[group]
+        }));
+        setActiveGroup(group);
+        setActiveTech(null);
     };
-
-    const renderLevelIndicators = (level) => {
-        return Array(5).fill(0).map((_, index) => (
-            <div
-                key={index}
-                className={`h-3 w-3 border-style rounded-md mr-2 ${index < level ? 'bg-primary' : ''}`}
-            ></div>
-        ));
-    };
-
-    const renderGroupSection = (group) => (
-        <div
-            className='sm:w-[43%] h-full max-smh:mb-8'
-
-        >
-            <div className="sm:h-[10%] h-[5%] w-full"></div>
-            <h1 className="w-full text-center box-glow" onMouseEnter={() => !isMobile && handleGroupInteraction(group)}
-                onClick={() => isMobile && handleGroupInteraction(group)}
-                onMouseLeave={handleMouseLeave}>{groups[group]}</h1>
-            <div className='px-1 mt-2 text-xs sm:ml-3'>
-                {groupTagsMap[group].map(item => (
-                    <li
-                        key={item.name}
-                        className='flex flex-row items-center justify-between mb-1 box-glow'
-                        onMouseEnter={() => !isMobile && handleTechInteraction(group, item.name)}
-                        onClick={() => isMobile && handleTechInteraction(group, item.name)}
-                    >
-                        <div className='mr-5'>{item.name}</div>
-                        <div className='flex flex-row'>
-                            {renderLevelIndicators(item.level)}
-                        </div>
-                    </li>
-                ))}
-            </div>
-        </div>
-    );
 
     return (
-        <div className='flex flex-col w-full h-full min-h-[300px] overflow-y-scroll sm:px-5'>
-            <div className='w-full flex-grow flex sm:flex-row flex-col justify-between items-center'>
-                {renderGroupSection('PL')}
-                {renderGroupSection('Framework')}
-            </div>
-            <div className='w-full flex-grow flex sm:flex-row flex-col justify-between items-center'>
-                {renderGroupSection('Databases')}
-                {renderGroupSection('Misc')}
-            </div>
-            <div className="w-full h-auto flex justify-center">
-                <div className="flex flex-wrap justify-center text-[9px]">
-                    {Object.entries(groupTagsMap).map(([groupName, tags]) => (
-                        <GroupTags
-                            key={groupName}
-                            activeGroup={activeGroup}
-                            activeTech={activeTech}
-                            groupName={groupName}
-                            tags={tags}
-                        />
-                    ))}
-                </div>
-            </div>
+        <div className="w-full max-w-3xl mx-auto p-4 h-full overflow-y-auto">
+            {Object.entries(groupTagsMap).map(([group, tags]) => (
+                <AccordionItem
+                    key={group}
+                    group={group}
+                    tags={tags}
+                    isOpen={openAccordions[group]}
+                    toggleAccordion={() => toggleAccordion(group)}
+                    activeGroup={activeGroup}
+                    activeTech={activeTech}
+                    handleTechInteraction={handleTechInteraction}
+                />
+            ))}
         </div>
     );
 };
