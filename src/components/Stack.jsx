@@ -9,32 +9,32 @@ const groups = {
 
 const groupTagsMap = {
     PL: [
-        { name: "Python", level: 5, frequency: 70 },
-        { name: "C", level: 5, frequency: 100 },
-        { name: "Java", level: 5, frequency: 30 },
-        { name: "JavaScript", level: 4, frequency: 70 },
-        { name: "HTML", level: 4, frequency: 90 },
-        { name: "CSS", level: 4, frequency: 90 },
+        { name: "Python", level: 4, frequency: 70 },
+        { name: "C", level: 4, frequency: 100 },
+        { name: "Java", level: 4, frequency: 30 },
+        { name: "JavaScript", level: 3, frequency: 70 },
+        { name: "HTML", level: 3, frequency: 90 },
+        { name: "CSS", level: 3, frequency: 90 },
     ],
     Framework: [
-        { name: "React", level: 4, frequency: 80 },
-        { name: "TailwindCSS", level: 4, frequency: 70 },
-        { name: "Express.js", level: 3, frequency: 40 },
-        { name: "Django", level: 5, frequency: 70 },
-        { name: "Flask", level: 3, frequency: 20 }
+        { name: "React", level: 3, frequency: 80 },
+        { name: "TailwindCSS", level: 3, frequency: 70 },
+        { name: "Express.js", level: 2, frequency: 40 },
+        { name: "Django", level: 4, frequency: 70 },
+        { name: "Flask", level: 2, frequency: 20 }
     ],
     Databases: [
-        { name: "PostgreSQL", level: 3, frequency: 70 },
-        { name: "MongoDB", level: 2, frequency: 40 },
+        { name: "PostgreSQL", level: 2, frequency: 70 },
+        { name: "MongoDB", level: 1, frequency: 40 },
     ],
     Misc: [
-        { name: "Git", level: 4, frequency: 80 },
-        { name: "Docker", level: 3, frequency: 50 },
-        { name: "REST", level: 4, frequency: 70 },
+        { name: "Git", level: 3, frequency: 80 },
+        { name: "Docker", level: 2, frequency: 50 },
+        { name: "REST", level: 3, frequency: 70 },
         // { name: "Node.js", level: 3, frequency: 60 },
-        { name: "Selenium", level: 3, frequency: 30 },
-        { name: "Chart.js", level: 3, frequency: 40 },
-        { name: "JavaFX", level: 3, frequency: 30 },
+        { name: "Selenium", level: 2, frequency: 30 },
+        { name: "Chart.js", level: 1, frequency: 40 },
+        { name: "JavaFX", level: 2, frequency: 30 },
     ],
 };
 

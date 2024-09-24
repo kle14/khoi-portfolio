@@ -40,22 +40,22 @@ export const Projects = () => {
         //     github: 'https://github.com/kle14/AI_project',
         //     media: placeholderImage,
         // },
-        {
-            title: 'Buffer Management System',
-            description: `
-            Developed in C, this project involved creating a buffer management system, featuring buffer creation, modification, 
-            file input/output operations, and running user-specified programs.
-            `,
-            techStack: ['C', 'GDB', 'Makefile'],
-            github: 'https://github.com/kle14/NARU_Buffer_Management_System',
-            media: placeholderImage,
-        },
+        // {
+        //     title: 'Buffer Management System',
+        //     description: `
+        //     Developed in C, this project involved creating a buffer management system, featuring buffer creation, modification, 
+        //     file input/output operations, and running user-specified programs.
+        //     `,
+        //     techStack: ['C', 'GDB', 'Makefile'],
+        //     github: 'https://github.com/kle14/NARU_Buffer_Management_System',
+        //     media: placeholderImage,
+        // },
         {
             title: 'Kruskal Algorithm Visualizer',
             description: `
-            This project is a visualizer for the Kruskal Algorithm. 
+            This is a visualizer for the Kruskal Algorithm. 
             Utilizing Java and JavaFX, I was able to create a simple yet effective visualizer that
-            demonstrates how the Kruskal Algorithm works.
+            shows how the Kruskal Algorithm works.
             `,
             techStack: ['Java', 'JavaFX'],
             github: 'https://github.com/kle14/Kruskal_Algorithm_Simulator',
@@ -64,7 +64,7 @@ export const Projects = () => {
         {
             title: 'Minesweeper Game',
             description: `
-            This is a simple Minesweeper game that I developed as part of my Object-Oriented Programming course. 
+            This is a simple Minesweeper game that I made as part of my Data Structure & Algorithm course. 
             It features a simple GUI and the ability to play the game with varying difficulties.
             `,
             techStack: ['Java', 'JavaFX'],
@@ -79,10 +79,10 @@ export const Projects = () => {
             {projects.map((project, index) => {
                 return (
                     <div key={index} className='w-full h-full lg:snap-start mb-8 flex-grow'>
-                        <div className='flex justify-center lg:text-xl text-lg mb-1'>
+                        <div className='flex justify-center lg:text-xl text-lg mb-2'>
                             {project.title}
                         </div>
-                        <div className='px-3 mb-3 text-xs flex justify-center flex-wrap'>
+                        <div className='px-3 mb-2 text-xs flex justify-center flex-wrap'>
                             {project.techStack.map((tech, index) => {
                                 return (
                                     <div key={index} className='mr-2 box-glow'>{tech}</div>
@@ -90,9 +90,9 @@ export const Projects = () => {
                             })}
                         </div>
                         <div className='h-full flex flex-col items-center flex-grow'>
-                            <img src={project.media} alt="Project thumbnail" className="lg:w-[75%] w-[95%] lg:h-52 sm:h-[80%] mb-2" />
-                            <a href={project.github} className='text-xs mb-2 box-glow'>Check me out</a>
-                            <p className='lg:text-xs sm:text-sm text-base max-smh:text-xs px-10 text-center'>{project.description}</p>
+                            <img src={project.media} alt={placeholderImage} className="lg:w-[75%] w-[95%] lg:h-52 sm:h-[80%] mb-2" />
+                            <a href={project.github} className='text-xs mb-1 box-glow'>Check me out</a>
+                            <p className='lg:text-xs sm:text-sm text-base max-smh:text-xs px-7 text-center'>{project.description}</p>
 
                         </div>
                     </div>

@@ -5,6 +5,7 @@ export const Experiences = () => {
     const experiences = [
         {
             title: 'Leidos,Inc.',
+            link: 'https://www.leidos.com/',
             role: 'Web Developer Intern',
             duration: 'June 2024 - Present',
             summary: 'Collaborated in a team to develop a full-stack web application, featuring data visualization, geospatial mapping, and real-time updates data.',
@@ -15,7 +16,8 @@ export const Experiences = () => {
             ],
         },
         {
-            title: 'Center for History and New Media',
+            title: 'RRCHNM',
+            link: 'https://rrchnm.org/',
             role: 'IT Assistant',
             duration: 'February 2023 - June 2024',
             summary: 'Prototyped and maintained web applications for the Center, as well as, provided technical support for the staff.',
@@ -28,6 +30,7 @@ export const Experiences = () => {
         },
         {
             title: 'George Mason University',
+            link: 'https://www.gmu.edu/',
             role: 'Teaching Assistant',
             duration: 'January 2023 - Present',
             summary: 'Grading assignments, holding office hours, creating projects, and assisting students in understanding course material.',
@@ -42,24 +45,27 @@ export const Experiences = () => {
 
     return (
         <div className="overflow-y-auto md:w-full h-full max-md:text-center lg:snap-y lg:snap-mandatory flex flex-col px-5">
-            {experiences.map((experiences, index) => {
+            {experiences.map((experience, index) => {
                 return (
-                    <div key={index} className="w-full h-full lg:snap-start flex-grow mb-20">
-                        <div className="flex justify-center text-xl sm:mb-1">
-                            {experiences.title}
+                    <div key={index} className="w-full min-h-full lg:snap-start flex flex-col flex-grow">
+                        <div className="flex sm:justify-between justify-center sm:mb-2">
+                            <h1 className="text-xl">{experience.title}</h1>
+                            <p className="text-[10px] flex items-end max-sm:hidden">{experience.link}</p>
                         </div>
-                        <div className="h-fit">
-                            <div className="max-sm:mb-4 mb-4 max-sm:mt-1 flex sm:justify-between max-sm:flex-col max-sm:items-center sm:items-center sm:pr-10">
-                                <p className="text-base">{experiences.role}</p>
-                                <p className="text-xs">{experiences.duration}</p>
+                        <div className="flex flex-col flex-grow">
+                            <div className="max-sm:mb-4 mb-4 max-sm:mt-1 flex sm:justify-between max-sm:flex-col max-sm:items-center sm:items-center ">
+                                <p className="text-base">{experience.role}</p>
+                                <p className="text-xs">{experience.duration}</p>
                             </div>
                             <div>
-                                <p className="sm:mb-3 mb-5 text-sm max-sm:text-center max-sm:text-xs sm:pr-10">{experiences.summary}</p>
+                                <p className="sm:mb-4 mb-5 text-sm max-sm:text-center max-sm:text-xs">{experience.summary}</p>
                             </div>
-                            <div className="h-full w-full">
-                                {experiences.bulletpoints.map((point, pointIndex) => (
-                                    <li key={pointIndex} className="mb-3 text-xs sm:pr-10">{point}</li>
-                                ))}
+                            <div className="flex-grow">
+                                <ul className="h-full">
+                                    {experience.bulletpoints.map((point, pointIndex) => (
+                                        <li key={pointIndex} className="mb-3 text-xs">{"• " + point}</li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
