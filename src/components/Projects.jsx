@@ -15,7 +15,7 @@ export const Projects = () => {
             . Inspired by the Fallout series and retro design, 
             `,
             techStack: ['React', 'TailwindCSS', 'HTML/CSS', 'JavaScript'],
-            github: 'https://github.com/kle14/porfolio',
+            github: 'https://github.com/kle14/khoi-portfolio',
             media: Porfolio,
         },
         {
