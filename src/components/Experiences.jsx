@@ -50,7 +50,9 @@ export const Experiences = () => {
                     <div key={index} className="w-full min-h-full lg:snap-start flex flex-col flex-grow">
                         <div className="flex sm:justify-between justify-center sm:mb-2">
                             <h1 className="text-xl">{experience.title}</h1>
-                            <p className="text-[10px] flex items-end max-sm:hidden">{experience.link}</p>
+                            <div className="text-[10px] flex max-sm:hidden items-end">
+                                <a href={experience.link} className="h-fit"> {experience.link} </a>
+                            </div>
                         </div>
                         <div className="flex flex-col flex-grow">
                             <div className="max-sm:mb-4 mb-4 max-sm:mt-1 flex sm:justify-between max-sm:flex-col max-sm:items-center sm:items-center ">
